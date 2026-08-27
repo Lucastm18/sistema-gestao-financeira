@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Gestão Financeira</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="sistema">
+
+        <!-- =====================================
+             MENU LATERAL
+        ====================================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                <h2>Gestão Financeira</h2>
+                <span>Controle Financeiro</span>
+            </div>
+
+            <nav>
+                <ul class="menu">
+
+                    <li>
+                        <a href="index.html" class="ativo">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="receitas.html">
+                            Receitas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="despesas.html">
+                            Despesas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="relatorios.html">
+                            Relatórios
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="configuracoes.html">
+                            Configurações
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </aside>
+
+
+        <!-- =====================================
+             CONTEÚDO PRINCIPAL
+        ====================================== -->
+
+        <div class="conteudo-sistema">
+
+            <!-- =====================================
+                 CABEÇALHO
+            ====================================== -->
+
+            <header class="topbar">
+
+                <div>
+                    <h1>Dashboard</h1>
+                </div>
+
+                <div class="usuario-logado">
+
+                    <span>
+                        Olá,
+                        <strong id="nomeUsuario">
+                            Usuário
+                        </strong>
+                    </span>
+
+
+                    <!-- TEMA CLARO / ESCURO -->
+
+                    <button
+                        type="button"
+                        class="btn btn-tema btn-small"
+                        id="btnTema"
+                        title="Alterar tema"
+                    >
+                        🌙
+                    </button>
+
+
+                    <!-- LOGOUT -->
+
+                    <button
+                        type="button"
+                        class="btn btn-secundario btn-small"
+                        id="btnSair"
+                    >
+                        Sair
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- =====================================
+                 CONTEÚDO
+            ====================================== -->
+
+            <main class="conteudo">
+
+                <!-- TÍTULO -->
+
+                <div class="titulo-pagina">
+
+                    <div>
+
+                        <h2>Visão Geral</h2>
+
+                        <p>
+                            Acompanhe a situação financeira
+                            do sistema.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================================
+                     CARDS
+                ====================================== -->
+
+                <section class="cards">
+
+                    <!-- RECEITAS -->
+
+                    <article class="card receita">
+
+                        <p class="card-titulo">
+                            Total de Receitas
+                        </p>
+
+                        <p
+                            class="card-valor"
+                            id="totalReceitas"
+                        >
+                            R$ 0,00
+                        </p>
+
+                    </article>
+
+
+                    <!-- DESPESAS -->
+
+                    <article class="card despesa">
+
+                        <p class="card-titulo">
+                            Total de Despesas
+                        </p>
+
+                        <p
+                            class="card-valor"
+                            id="totalDespesas"
+                        >
+                            R$ 0,00
+                        </p>
+
+                    </article>
+
+
+                    <!-- SALDO -->
+
+                    <article class="card saldo">
+
+                        <p class="card-titulo">
+                            Saldo Atual
+                        </p>
+
+                        <p
+                            class="card-valor"
+                            id="saldoAtual"
+                        >
+                            R$ 0,00
+                        </p>
+
+                    </article>
+
+                </section>
+
+
+                <!-- =====================================
+                     GRÁFICO FINANCEIRO
+                ====================================== -->
+
+                <section class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <h3>
+                                Receitas x Despesas
+                            </h3>
+
+                            <p class="texto-secundario">
+                                Comparativo financeiro geral
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="grafico-financeiro">
+
+
+                        <!-- RECEITAS -->
+
+                        <div class="grafico-item">
+
+                            <div class="grafico-info">
+
+                                <span class="grafico-label">
+                                    Receitas
+                                </span>
+
+                                <strong
+                                    class="valor-receita"
+                                    id="graficoValorReceitas"
+                                >
+                                    +R$ 0,00
+                                </strong>
+
+                            </div>
+
+
+                            <div class="grafico-barra">
+
+                                <div
+                                    class="grafico-preenchimento grafico-receita"
+                                    id="barraReceitas"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DESPESAS -->
+
+                        <div class="grafico-item">
+
+                            <div class="grafico-info">
+
+                                <span class="grafico-label">
+                                    Despesas
+                                </span>
+
+                                <strong
+                                    class="valor-despesa"
+                                    id="graficoValorDespesas"
+                                >
+                                    -R$ 0,00
+                                </strong>
+
+                            </div>
+
+
+                            <div class="grafico-barra">
+
+                                <div
+                                    class="grafico-preenchimento grafico-despesa"
+                                    id="barraDespesas"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RESUMO DO GRÁFICO -->
+
+                    <div class="grafico-resumo">
+
+                        <span>
+
+                            Maior movimentação:
+
+                            <strong id="maiorMovimentacao">
+                                -
+                            </strong>
+
+                        </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================================
+                     ACESSO RÁPIDO
+                ====================================== -->
+
+                <section class="painel">
+
+                    <div class="painel-header">
+
+                        <h3>
+                            Acesso rápido
+                        </h3>
+
+                    </div>
+
+
+                    <div class="form-acoes">
+
+                        <a
+                            href="receitas.html"
+                            class="btn btn-success"
+                        >
+                            + Nova Receita
+                        </a>
+
+
+                        <a
+                            href="despesas.html"
+                            class="btn btn-danger"
+                        >
+                            + Nova Despesa
+                        </a>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================================
+                     ÚLTIMAS MOVIMENTAÇÕES
+                ====================================== -->
+
+                <section class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <h3>
+                                Últimas Movimentações
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tabela-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Data</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="tabelaMovimentacoes">
+
+                                <tr>
+
+                                    <td
+                                        colspan="6"
+                                        class="tabela-vazia"
+                                    >
+                                        Nenhuma movimentação cadastrada.
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script src="assets/js/storage.js"></script>
+
+    <script src="assets/js/auth.js"></script>
+
+    <script src="assets/js/utils.js"></script>
+
+    <script src="assets/js/theme.js"></script>
+
+    <script src="assets/js/app.js"></script>
+
+</body>
+
+</html> 

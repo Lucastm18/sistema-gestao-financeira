@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Criar Conta | Gestão Financeira
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+</head>
+
+
+<body class="pagina-login">
+
+
+    <!-- TEMA -->
+
+    <button
+        type="button"
+        class="btn btn-tema btn-small"
+        id="btnTema"
+        title="Alterar tema"
+        style="position: fixed; top: 20px; right: 20px;"
+    >
+        🌙
+    </button>
+
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="login-header">
+
+                <h1>
+                    Criar Conta
+                </h1>
+
+                <p>
+                    Cadastre um novo usuário
+                </p>
+
+            </div>
+
+
+            <!-- FORMULÁRIO -->
+
+            <form id="formCadastro">
+
+
+                <div class="campo">
+
+                    <label for="nome">
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        placeholder="Digite seu nome"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="usuario">
+                        Usuário
+                    </label>
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        placeholder="Escolha um usuário"
+                        maxlength="50"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        placeholder="Escolha uma senha"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="confirmarSenha">
+                        Confirmar Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        placeholder="Digite a senha novamente"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <p
+                    id="mensagemCadastro"
+                    class="mensagem-login"
+                ></p>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Criar Conta
+                </button>
+
+
+                <a
+                    href="login.html"
+                    class="btn btn-secundario"
+                    style="margin-top: 10px;"
+                >
+                    Voltar para o Login
+                </a>
+
+
+            </form>
+
+
+            <div class="login-footer">
+
+                <small>
+                    Sistema de Gestão Financeira
+                </small>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="assets/js/storage.js"></script>
+
+    <script src="assets/js/auth.js"></script>
+
+    <script src="assets/js/theme.js"></script>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                const formulario =
+                    document.getElementById(
+                        "formCadastro"
+                    );
+
+
+                const nome =
+                    document.getElementById(
+                        "nome"
+                    );
+
+
+                const usuario =
+                    document.getElementById(
+                        "usuario"
+                    );
+
+
+                const senha =
+                    document.getElementById(
+                        "senha"
+                    );
+
+
+                const confirmarSenha =
+                    document.getElementById(
+                        "confirmarSenha"
+                    );
+
+
+                const mensagem =
+                    document.getElementById(
+                        "mensagemCadastro"
+                    );
+
+
+                formulario.addEventListener(
+                    "submit",
+                    function (evento) {
+
+                        evento.preventDefault();
+
+
+                        /*
+                        ============================
+                        CONFIRMAR SENHA
+                        ============================
+                        */
+
+                        if (
+                            senha.value !==
+                            confirmarSenha.value
+                        ) {
+
+                            mensagem.textContent =
+                                "As senhas não são iguais.";
+
+
+                            mensagem.className =
+                                "mensagem-login erro";
+
+
+                            confirmarSenha.focus();
+
+
+                            return;
+
+                        }
+
+
+                        /*
+                        ============================
+                        CADASTRAR
+                        ============================
+                        */
+
+                        const resultado =
+                            Auth.cadastrarUsuario(
+                                nome.value,
+                                usuario.value,
+                                senha.value
+                            );
+
+
+                        mensagem.textContent =
+                            resultado.mensagem;
+
+
+                        if (
+                            resultado.sucesso
+                        ) {
+
+                            mensagem.className =
+                                "mensagem-login sucesso";
+
+
+                            formulario.reset();
+
+
+                            /*
+                            Depois de 1 segundo,
+                            volta para o login.
+                            */
+
+                            setTimeout(
+                                function () {
+
+                                    window.location.href =
+                                        "login.html";
+
+                                },
+                                1000
+                            );
+
+                        } else {
+
+                            mensagem.className =
+                                "mensagem-login erro";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

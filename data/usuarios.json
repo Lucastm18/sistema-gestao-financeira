@@ -1,0 +1,9 @@
+[
+    {
+        "codigo": 1,
+        "nome": "Administrador",
+        "usuario": "admin",
+        "senha": "123456",
+        "status": "Ativo"
+    }
+]

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Gestão Financeira</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="pagina-login">
+
+    <button
+        type="button"
+        class="btn btn-tema btn-small"
+        id="btnTema"
+        title="Alterar tema"
+        style="position: fixed; top: 20px; right: 20px;"
+    >
+        🌙
+    </button>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="login-header">
+                <h1>Gestão Financeira</h1>
+                <p>Entre para acessar o sistema</p>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="campo">
+                    <label for="usuario">Usuário</label>
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="Digite seu usuário"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="senha">Senha</label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <div style="margin-top: 8px; text-align: right;">
+                    <a href="recuperar-senha.html">
+                        Esqueci minha senha
+                    </a>
+                </div>
+
+                <p id="mensagemLogin" class="mensagem-login"></p>
+
+                <button type="submit" class="btn btn-primary">
+                    Entrar
+                </button>
+
+                <div style="margin-top: 15px; text-align: center;">
+                    <span>Não possui uma conta?</span>
+                    <a href="cadastro.html">Criar conta</a>
+                </div>
+
+            </form>
+
+            <div class="login-footer">
+                <small>Sistema de Gestão Financeira</small>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+</body>
+</html>

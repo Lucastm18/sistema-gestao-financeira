@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despesas | Gestão Financeira</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="sistema">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                <h2>Gestão Financeira</h2>
+                <span>Controle Financeiro</span>
+            </div>
+
+            <nav>
+
+                <ul class="menu">
+
+                    <li>
+                        <a href="index.html">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="receitas.html">
+                            Receitas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="despesas.html" class="ativo">
+                            Despesas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="relatorios.html">
+                            Relatórios
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="configuracoes.html">
+                            Configurações
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </aside>
+
+        <div class="conteudo-sistema">
+
+            <header class="topbar">
+
+                <div>
+                    <h1>Despesas</h1>
+                </div>
+
+                <div class="usuario-logado">
+
+                    <span>
+                        Olá,
+                        <strong id="nomeUsuario">Usuário</strong>
+                    </span>
+
+                    <button
+                        type="button"
+                        class="btn btn-tema btn-small"
+                        id="btnTema"
+                        title="Alterar tema"
+                    >
+                        🌙
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-secundario btn-small"
+                        id="btnSair"
+                    >
+                        Sair
+                    </button>
+
+                </div>
+
+            </header>
+
+            <main class="conteudo">
+
+                <div class="titulo-pagina">
+
+                    <div>
+                        <h2>Controle de Despesas</h2>
+                        <p>Cadastre e acompanhe os valores gastos.</p>
+                    </div>
+
+                </div>
+
+                <!-- FORMULÁRIO -->
+                <section class="painel">
+
+                    <div class="painel-header">
+                        <h3 id="tituloFormulario">Nova Despesa</h3>
+                    </div>
+
+                    <form id="formDespesa">
+
+                        <input
+                            type="hidden"
+                            id="codigoDespesa"
+                        >
+
+                        <div class="form-grid">
+
+                            <div class="campo">
+                                <label for="descricao">Descrição</label>
+
+                                <input
+                                    type="text"
+                                    id="descricao"
+                                    maxlength="100"
+                                    placeholder="Ex.: Conta de energia"
+                                    required
+                                >
+                            </div>
+
+                            <div class="campo">
+                                <label for="valor">Valor</label>
+
+                                <input
+                                    type="number"
+                                    id="valor"
+                                    min="0.01"
+                                    step="0.01"
+                                    placeholder="0,00"
+                                    required
+                                >
+                            </div>
+
+                            <div class="campo">
+                                <label for="data">Data</label>
+
+                                <input
+                                    type="date"
+                                    id="data"
+                                    required
+                                >
+                            </div>
+
+                            <div class="campo">
+                                <label for="categoria">Categoria</label>
+
+                                <input
+                                    type="text"
+                                    id="categoria"
+                                    maxlength="50"
+                                    placeholder="Ex.: Moradia"
+                                    required
+                                >
+                            </div>
+
+                            <div class="campo">
+                                <label for="status">Status</label>
+
+                                <select id="status" required>
+                                    <option value="Pago">Pago</option>
+                                    <option value="Pendente">Pendente</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="mensagemDespesa"
+                            class="mensagem-login"
+                        ></div>
+
+                        <div class="form-acoes">
+
+                            <button
+                                type="button"
+                                class="btn btn-secundario"
+                                id="btnCancelar"
+                                style="display: none;"
+                            >
+                                Cancelar
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="btn btn-danger"
+                                id="btnSalvar"
+                            >
+                                Salvar Despesa
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+                <!-- FILTROS -->
+                <section class="painel">
+
+                    <div class="painel-header">
+                        <div>
+                            <h3>Filtros</h3>
+                            <p class="texto-secundario">
+                                Encontre despesas específicas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="campo">
+                            <label for="filtroBusca">Buscar</label>
+
+                            <input
+                                type="text"
+                                id="filtroBusca"
+                                placeholder="Descrição da despesa"
+                            >
+                        </div>
+
+                        <div class="campo">
+                            <label for="filtroCategoria">Categoria</label>
+
+                            <select id="filtroCategoria">
+                                <option value="">Todas</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="filtroStatus">Status</label>
+
+                            <select id="filtroStatus">
+                                <option value="">Todos</option>
+                                <option value="Pago">Pago</option>
+                                <option value="Pendente">Pendente</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="filtroData">Data</label>
+
+                            <input
+                                type="date"
+                                id="filtroData"
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="form-acoes">
+
+                        <button
+                            type="button"
+                            class="btn btn-secundario"
+                            id="btnLimparFiltros"
+                        >
+                            Limpar filtros
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="btnAplicarFiltros"
+                        >
+                            Filtrar
+                        </button>
+
+                    </div>
+
+                </section>
+
+                <!-- LISTAGEM -->
+                <section class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+                            <h3>Despesas cadastradas</h3>
+
+                            <p>
+                                Total:
+                                <strong id="totalDespesasPagina">
+                                    R$ 0,00
+                                </strong>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="tabela-container">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Data</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tabelaDespesas">
+                                <tr>
+                                    <td
+                                        colspan="7"
+                                        class="tabela-vazia"
+                                    >
+                                        Nenhuma despesa cadastrada.
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                Auth.protegerPagina();
+
+                const usuario =
+                    Auth.usuarioAtual();
+
+                const nomeUsuario =
+                    document.getElementById(
+                        "nomeUsuario"
+                    );
+
+                if (usuario) {
+                    nomeUsuario.textContent =
+                        usuario.nome;
+                }
+
+                document
+                    .getElementById("btnSair")
+                    .addEventListener(
+                        "click",
+                        function () {
+                            Auth.logout();
+                        }
+                    );
+
+                const formulario =
+                    document.getElementById(
+                        "formDespesa"
+                    );
+
+                const codigo =
+                    document.getElementById(
+                        "codigoDespesa"
+                    );
+
+                const descricao =
+                    document.getElementById(
+                        "descricao"
+                    );
+
+                const valor =
+                    document.getElementById(
+                        "valor"
+                    );
+
+                const data =
+                    document.getElementById(
+                        "data"
+                    );
+
+                const categoria =
+                    document.getElementById(
+                        "categoria"
+                    );
+
+                const status =
+                    document.getElementById(
+                        "status"
+                    );
+
+                const mensagem =
+                    document.getElementById(
+                        "mensagemDespesa"
+                    );
+
+                const btnCancelar =
+                    document.getElementById(
+                        "btnCancelar"
+                    );
+
+                const btnSalvar =
+                    document.getElementById(
+                        "btnSalvar"
+                    );
+
+                const tituloFormulario =
+                    document.getElementById(
+                        "tituloFormulario"
+                    );
+
+                const filtroBusca =
+                    document.getElementById(
+                        "filtroBusca"
+                    );
+
+                const filtroCategoria =
+                    document.getElementById(
+                        "filtroCategoria"
+                    );
+
+                const filtroStatus =
+                    document.getElementById(
+                        "filtroStatus"
+                    );
+
+                const filtroData =
+                    document.getElementById(
+                        "filtroData"
+                    );
+
+                const btnLimparFiltros =
+                    document.getElementById(
+                        "btnLimparFiltros"
+                    );
+
+                const btnAplicarFiltros =
+                    document.getElementById(
+                        "btnAplicarFiltros"
+                    );
+
+                data.value =
+                    Utils.dataAtual();
+
+                formulario.addEventListener(
+                    "submit",
+                    function (evento) {
+
+                        evento.preventDefault();
+
+                        const valorNumero =
+                            Utils.numero(
+                                valor.value
+                            );
+
+                        if (valorNumero <= 0) {
+
+                            exibirMensagem(
+                                "Informe um valor maior que zero.",
+                                "erro"
+                            );
+
+                            return;
+                        }
+
+                        const despesa = {
+
+                            descricao:
+                                descricao.value.trim(),
+
+                            valor:
+                                valorNumero,
+
+                            data:
+                                data.value,
+
+                            categoria:
+                                categoria.value.trim(),
+
+                            status:
+                                status.value
+
+                        };
+
+                        if (codigo.value) {
+
+                            Storage.editarDoUsuario(
+                                "despesas",
+                                codigo.value,
+                                despesa,
+                                Auth.usuarioId()
+                            );
+
+                            exibirMensagem(
+                                "Despesa atualizada com sucesso!",
+                                "sucesso"
+                            );
+
+                        } else {
+
+                            Storage.adicionarDoUsuario(
+                                "despesas",
+                                despesa,
+                                Auth.usuarioId()
+                            );
+
+                            exibirMensagem(
+                                "Despesa cadastrada com sucesso!",
+                                "sucesso"
+                            );
+
+                        }
+
+                        limparFormulario();
+
+                        carregarDespesas();
+
+                    }
+                );
+
+                btnCancelar.addEventListener(
+                    "click",
+                    function () {
+
+                        limparFormulario();
+
+                        mensagem.textContent = "";
+
+                    }
+                );
+
+                function carregarDespesas() {
+
+                    const todasDespesas =
+                        Storage.listarDoUsuario(
+                            "despesas",
+                            Auth.usuarioId()
+                        );
+
+                    atualizarCategorias(
+                        todasDespesas
+                    );
+
+                    let despesas =
+                        aplicarFiltros(
+                            todasDespesas
+                        );
+
+                    const tabela =
+                        document.getElementById(
+                            "tabelaDespesas"
+                        );
+
+                    const total =
+                        Utils.somar(
+                            despesas
+                        );
+
+                    document.getElementById(
+                        "totalDespesasPagina"
+                    ).textContent =
+                        Utils.moeda(total);
+
+                    if (
+                        despesas.length === 0
+                    ) {
+
+                        tabela.innerHTML = `
+
+                            <tr>
+
+                                <td
+                                    colspan="7"
+                                    class="tabela-vazia"
+                                >
+                                    Nenhuma despesa encontrada.
+                                </td>
+
+                            </tr>
+
+                        `;
+
+                        return;
+
+                    }
+
+                    despesas =
+                        Utils.ordenarPorData(
+                            despesas
+                        );
+
+                    tabela.innerHTML =
+                        despesas.map(
+                            despesa => {
+
+                                const classeStatus =
+                                    despesa.status ===
+                                    "Pendente"
+
+                                        ? "status-pendente"
+
+                                        : "status-pago";
+
+                                return `
+
+                                    <tr>
+
+                                        <td>
+                                            ${despesa.codigo}
+                                        </td>
+
+                                        <td>
+                                            ${Utils.escaparHTML(
+                                                despesa.descricao
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${Utils.escaparHTML(
+                                                despesa.categoria
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${Utils.dataBR(
+                                                despesa.data
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            <strong class="valor-despesa">
+                                                -${Utils.moeda(
+                                                    despesa.valor
+                                                )}
+                                            </strong>
+                                        </td>
+
+                                        <td>
+                                            <span
+                                                class="status ${classeStatus}"
+                                            >
+                                                ${Utils.escaparHTML(
+                                                    despesa.status
+                                                )}
+                                            </span>
+                                        </td>
+
+                                        <td>
+
+                                            <button
+                                                class="btn btn-primary btn-small"
+                                                onclick="editarDespesa(${despesa.codigo})"
+                                            >
+                                                Editar
+                                            </button>
+
+                                            <button
+                                                class="btn btn-danger btn-small"
+                                                onclick="excluirDespesa(${despesa.codigo})"
+                                            >
+                                                Excluir
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                `;
+
+                            }
+                        ).join("");
+
+                }
+
+                function aplicarFiltros(
+                    despesas
+                ) {
+
+                    const busca =
+                        filtroBusca.value
+                            .trim()
+                            .toLowerCase();
+
+                    const categoriaSelecionada =
+                        filtroCategoria.value;
+
+                    const statusSelecionado =
+                        filtroStatus.value;
+
+                    const dataSelecionada =
+                        filtroData.value;
+
+                    return despesas.filter(
+                        despesa => {
+
+                            const descricaoDespesa =
+                                String(
+                                    despesa.descricao
+                                ).toLowerCase();
+
+                            const passouBusca =
+                                !busca ||
+                                descricaoDespesa.includes(
+                                    busca
+                                );
+
+                            const passouCategoria =
+                                !categoriaSelecionada ||
+                                despesa.categoria ===
+                                    categoriaSelecionada;
+
+                            const passouStatus =
+                                !statusSelecionado ||
+                                despesa.status ===
+                                    statusSelecionado;
+
+                            const passouData =
+                                !dataSelecionada ||
+                                despesa.data ===
+                                    dataSelecionada;
+
+                            return (
+                                passouBusca &&
+                                passouCategoria &&
+                                passouStatus &&
+                                passouData
+                            );
+
+                        }
+                    );
+
+                }
+
+                function atualizarCategorias(
+                    despesas
+                ) {
+
+                    const categoriaAtual =
+                        filtroCategoria.value;
+
+                    const categorias = [
+                        ...new Set(
+                            despesas
+                                .map(
+                                    despesa =>
+                                        despesa.categoria
+                                )
+                                .filter(Boolean)
+                        )
+                    ];
+
+                    categorias.sort(
+                        (a, b) =>
+                            a.localeCompare(
+                                b,
+                                "pt-BR"
+                            )
+                    );
+
+                    filtroCategoria.innerHTML =
+                        '<option value="">Todas</option>';
+
+                    categorias.forEach(
+                        categoriaItem => {
+
+                            const option =
+                                document.createElement(
+                                    "option"
+                                );
+
+                            option.value =
+                                categoriaItem;
+
+                            option.textContent =
+                                categoriaItem;
+
+                            filtroCategoria.appendChild(
+                                option
+                            );
+
+                        }
+                    );
+
+                    if (
+                        categorias.includes(
+                            categoriaAtual
+                        )
+                    ) {
+
+                        filtroCategoria.value =
+                            categoriaAtual;
+
+                    }
+
+                }
+
+                window.editarDespesa =
+                    function (id) {
+
+                        const despesa =
+                            Storage.buscarDoUsuario(
+                                "despesas",
+                                id,
+                                Auth.usuarioId()
+                            );
+
+                        if (!despesa) {
+                            return;
+                        }
+
+                        codigo.value =
+                            despesa.codigo;
+
+                        descricao.value =
+                            despesa.descricao;
+
+                        valor.value =
+                            despesa.valor;
+
+                        data.value =
+                            despesa.data;
+
+                        categoria.value =
+                            despesa.categoria;
+
+                        status.value =
+                            despesa.status;
+
+                        tituloFormulario.textContent =
+                            "Editar Despesa";
+
+                        btnSalvar.textContent =
+                            "Salvar Alterações";
+
+                        btnCancelar.style.display =
+                            "inline-flex";
+
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
+
+                    };
+
+                window.excluirDespesa =
+                    function (id) {
+
+                        const despesa =
+                            Storage.buscarDoUsuario(
+                                "despesas",
+                                id,
+                                Auth.usuarioId()
+                            );
+
+                        if (!despesa) {
+                            return;
+                        }
+
+                        const confirmar =
+                            window.confirm(
+                                `Deseja excluir a despesa "${despesa.descricao}"?`
+                            );
+
+                        if (!confirmar) {
+                            return;
+                        }
+
+                        Storage.excluirDoUsuario(
+                            "despesas",
+                            id,
+                            Auth.usuarioId()
+                        );
+                        
+                        if (
+                            Number(codigo.value) ===
+                            Number(id)
+                        ) {
+
+                            limparFormulario();
+
+                        }
+
+                        exibirMensagem(
+                            "Despesa excluída com sucesso!",
+                            "sucesso"
+                        );
+
+                        carregarDespesas();
+
+                    };
+
+                function limparFormulario() {
+
+                    formulario.reset();
+
+                    codigo.value = "";
+
+                    data.value =
+                        Utils.dataAtual();
+
+                    status.value =
+                        "Pago";
+
+                    tituloFormulario.textContent =
+                        "Nova Despesa";
+
+                    btnSalvar.textContent =
+                        "Salvar Despesa";
+
+                    btnCancelar.style.display =
+                        "none";
+
+                }
+
+                function exibirMensagem(
+                    texto,
+                    tipo
+                ) {
+
+                    mensagem.textContent =
+                        texto;
+
+                    mensagem.className =
+                        `mensagem-login ${tipo}`;
+
+                }
+
+                btnAplicarFiltros.addEventListener(
+                    "click",
+                    function () {
+
+                        carregarDespesas();
+
+                    }
+                );
+
+                filtroBusca.addEventListener(
+                    "keydown",
+                    function (evento) {
+
+                        if (
+                            evento.key === "Enter"
+                        ) {
+
+                            evento.preventDefault();
+
+                            carregarDespesas();
+
+                        }
+
+                    }
+                );
+
+                btnLimparFiltros.addEventListener(
+                    "click",
+                    function () {
+
+                        filtroBusca.value = "";
+                        filtroCategoria.value = "";
+                        filtroStatus.value = "";
+                        filtroData.value = "";
+
+                        carregarDespesas();
+
+                    }
+                );
+
+                carregarDespesas();
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

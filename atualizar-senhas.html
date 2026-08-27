@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Senhas | Gestão Financeira</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="sistema">
+
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>Gestão Financeira</h2>
+                <span>Controle Financeiro</span>
+            </div>
+
+            <nav>
+                <ul class="menu">
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="receitas.html">Receitas</a></li>
+                    <li><a href="despesas.html">Despesas</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                    <li>
+                        <a href="atualizar-senhas.html" class="ativo" id="menuAtualizarSenhas">
+                            Atualizar Senhas
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="conteudo-sistema">
+
+            <header class="topbar">
+                <div><h1>Atualizar Senhas</h1></div>
+
+                <div class="usuario-logado">
+                    <span>Olá, <strong id="nomeUsuario">Administrador</strong></span>
+
+                    <button
+                        type="button"
+                        class="btn btn-tema btn-small"
+                        id="btnTema"
+                        title="Alterar tema"
+                    >🌙</button>
+
+                    <button
+                        type="button"
+                        class="btn btn-secundario btn-small"
+                        id="btnSair"
+                    >Sair</button>
+                </div>
+            </header>
+
+            <main class="conteudo">
+
+                <div class="titulo-pagina">
+                    <div>
+                        <h2>Solicitações de Senha</h2>
+                        <p>Aprove ou recuse pedidos de redefinição de senha.</p>
+                    </div>
+                </div>
+
+                <section class="painel">
+                    <div class="painel-header">
+                        <div>
+                            <h3>Solicitações Pendentes</h3>
+                            <p id="quantidadeSolicitacoes" class="texto-secundario">
+                                0 solicitações pendentes
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="tabela-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nome</th>
+                                    <th>Usuário</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tabelaSolicitacoes">
+                                <tr>
+                                    <td colspan="5" class="tabela-vazia">
+                                        Nenhuma solicitação pendente.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if (!Auth.protegerAdmin()) {
+                return;
+            }
+
+            const usuario = Auth.usuarioAtual();
+
+            if (usuario) {
+                document.getElementById("nomeUsuario").textContent = usuario.nome;
+            }
+
+            document.getElementById("btnSair").addEventListener("click", function () {
+                Auth.logout();
+            });
+
+            function carregarSolicitacoes() {
+
+                const solicitacoes = Storage.listarSolicitacoesSenha("Pendente");
+                const tabela = document.getElementById("tabelaSolicitacoes");
+                const quantidade = document.getElementById("quantidadeSolicitacoes");
+
+                quantidade.textContent = solicitacoes.length === 1
+                    ? "1 solicitação pendente"
+                    : `${solicitacoes.length} solicitações pendentes`;
+
+                if (solicitacoes.length === 0) {
+                    tabela.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="tabela-vazia">
+                                Nenhuma solicitação pendente.
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tabela.innerHTML = solicitacoes.map(solicitacao => {
+                    const data = new Date(solicitacao.dataSolicitacao);
+                    const dataFormatada = Number.isNaN(data.getTime())
+                        ? "-"
+                        : data.toLocaleString("pt-BR");
+
+                    return `
+                        <tr>
+                            <td>${solicitacao.codigo}</td>
+                            <td>${Utils.escaparHTML(solicitacao.nome)}</td>
+                            <td>${Utils.escaparHTML(solicitacao.usuario)}</td>
+                            <td>${dataFormatada}</td>
+                            <td>
+                                <button
+                                    type="button"
+                                    class="btn btn-success btn-small"
+                                    onclick="aprovarSolicitacao(${solicitacao.codigo})"
+                                >
+                                    Aprovar
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-danger btn-small"
+                                    onclick="recusarSolicitacao(${solicitacao.codigo})"
+                                >
+                                    Recusar
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join("");
+            }
+
+            window.aprovarSolicitacao = function (codigo) {
+                const confirmar = window.confirm(
+                    "Deseja aprovar esta alteração de senha?"
+                );
+
+                if (!confirmar) return;
+
+                const resultado = Auth.aprovarSolicitacaoSenha(codigo);
+                alert(resultado.mensagem);
+                carregarSolicitacoes();
+            };
+
+            window.recusarSolicitacao = function (codigo) {
+                const confirmar = window.confirm(
+                    "Deseja recusar esta solicitação?"
+                );
+
+                if (!confirmar) return;
+
+                const resultado = Auth.recusarSolicitacaoSenha(codigo);
+                alert(resultado.mensagem);
+                carregarSolicitacoes();
+            };
+
+            carregarSolicitacoes();
+        });
+    </script>
+
+</body>
+</html>

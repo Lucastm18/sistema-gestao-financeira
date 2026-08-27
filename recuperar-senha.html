@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Senha | Gestão Financeira</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="pagina-login">
+
+    <button
+        type="button"
+        class="btn btn-tema btn-small"
+        id="btnTema"
+        title="Alterar tema"
+        style="position: fixed; top: 20px; right: 20px;"
+    >🌙</button>
+
+    <main class="login-container">
+        <section class="login-card">
+
+            <div class="login-header">
+                <h1>Recuperar Senha</h1>
+                <p>Envie uma solicitação para o administrador</p>
+            </div>
+
+            <form id="formRecuperarSenha">
+
+                <div class="campo">
+                    <label for="usuario">Usuário</label>
+                    <input
+                        type="text"
+                        id="usuario"
+                        placeholder="Digite seu usuário"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="novaSenha">Nova Senha</label>
+                    <input
+                        type="password"
+                        id="novaSenha"
+                        placeholder="Digite a nova senha desejada"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="confirmarNovaSenha">Confirmar Nova Senha</label>
+                    <input
+                        type="password"
+                        id="confirmarNovaSenha"
+                        placeholder="Digite a nova senha novamente"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <p id="mensagemRecuperacao" class="mensagem-login"></p>
+
+                <button type="submit" class="btn btn-primary">
+                    Enviar Solicitação
+                </button>
+
+                <a href="login.html" class="btn btn-secundario" style="margin-top: 10px;">
+                    Voltar para o Login
+                </a>
+
+            </form>
+
+            <div class="login-footer">
+                <small>Sistema de Gestão Financeira</small>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const formulario = document.getElementById("formRecuperarSenha");
+            const usuario = document.getElementById("usuario");
+            const novaSenha = document.getElementById("novaSenha");
+            const confirmarNovaSenha = document.getElementById("confirmarNovaSenha");
+            const mensagem = document.getElementById("mensagemRecuperacao");
+
+            formulario.addEventListener("submit", function (evento) {
+                evento.preventDefault();
+
+                const resultado = Auth.solicitarRedefinicaoSenha(
+                    usuario.value,
+                    novaSenha.value,
+                    confirmarNovaSenha.value
+                );
+
+                mensagem.textContent = resultado.mensagem;
+                mensagem.className = resultado.sucesso
+                    ? "mensagem-login sucesso"
+                    : "mensagem-login erro";
+
+                if (resultado.sucesso) {
+                    formulario.reset();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Configurações | Gestão Financeira
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="sistema">
+
+
+        <!-- MENU LATERAL -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+
+                <h2>
+                    Gestão Financeira
+                </h2>
+
+                <span>
+                    Controle Financeiro
+                </span>
+
+            </div>
+
+
+            <nav>
+
+                <ul class="menu">
+
+                    <li>
+                        <a href="index.html">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="receitas.html">
+                            Receitas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="despesas.html">
+                            Despesas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="relatorios.html">
+                            Relatórios
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            href="configuracoes.html"
+                            class="ativo"
+                        >
+                            Configurações
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- CONTEÚDO -->
+
+        <div class="conteudo-sistema">
+
+
+            <!-- TOPO -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Configurações
+                    </h1>
+
+                </div>
+
+
+                <div class="usuario-logado">
+
+                    <span>
+
+                        Olá,
+
+                        <strong id="nomeUsuario">
+                            Usuário
+                        </strong>
+
+                    </span>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-tema btn-small"
+                        id="btnTema"
+                        title="Alterar tema"
+                    >
+                        🌙
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-secundario btn-small"
+                        id="btnSair"
+                    >
+                        Sair
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <main class="conteudo">
+
+
+                <!-- TÍTULO -->
+
+                <div class="titulo-pagina">
+
+                    <div>
+
+                        <h2>
+                            Configurações da Conta
+                        </h2>
+
+                        <p>
+                            Gerencie sua conta e suas preferências.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MINHA CONTA -->
+
+                <section class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <h3>
+                                Minha Conta
+                            </h3>
+
+                            <p class="texto-secundario">
+                                Altere suas informações pessoais.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="campo">
+
+                            <label for="configNome">
+                                Nome
+                            </label>
+
+                            <input
+                                type="text"
+                                id="configNome"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="configUsuario">
+                                Usuário
+                            </label>
+
+                            <input
+                                type="text"
+                                id="configUsuario"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-acoes">
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="btnSalvarConta"
+                        >
+                            Salvar Alterações
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SEGURANÇA -->
+
+                <section class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <h3>
+                                Segurança
+                            </h3>
+
+                            <p class="texto-secundario">
+                                Altere sua senha de acesso.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="campo">
+
+                            <label for="senhaAtual">
+                                Senha Atual
+                            </label>
+
+                            <input
+                                type="password"
+                                id="senhaAtual"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="novaSenha">
+                                Nova Senha
+                            </label>
+
+                            <input
+                                type="password"
+                                id="novaSenha"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="confirmarNovaSenha">
+                                Confirmar Nova Senha
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmarNovaSenha"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-acoes">
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="btnAlterarSenha"
+                        >
+                            Alterar Senha
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- APARÊNCIA -->
+
+                <section class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <h3>
+                                Aparência
+                            </h3>
+
+                            <p class="texto-secundario">
+                                Escolha o tema do sistema.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-acoes">
+
+                        <button
+                            type="button"
+                            class="btn btn-secundario"
+                            id="btnAlterarTemaConfig"
+                        >
+                            Alternar Tema
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- MEUS DADOS -->
+
+                <section class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <h3>
+                                Meus Dados
+                            </h3>
+
+                            <p class="texto-secundario">
+                                Gerencie os registros da sua conta.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-acoes">
+
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            id="btnLimparDados"
+                        >
+                            Limpar Minhas Movimentações
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                /*
+                ========================================
+                PROTEGER PÁGINA
+                ========================================
+                */
+
+                Auth.protegerPagina();
+
+
+                /*
+                ========================================
+                ELEMENTOS
+                ========================================
+                */
+
+                const usuario =
+                    Auth.usuarioAtual();
+
+
+                const nomeUsuario =
+                    document.getElementById(
+                        "nomeUsuario"
+                    );
+
+
+                const configNome =
+                    document.getElementById(
+                        "configNome"
+                    );
+
+
+                const configUsuario =
+                    document.getElementById(
+                        "configUsuario"
+                    );
+
+
+                const btnSalvarConta =
+                    document.getElementById(
+                        "btnSalvarConta"
+                    );
+
+
+                const senhaAtual =
+                    document.getElementById(
+                        "senhaAtual"
+                    );
+
+
+                const novaSenha =
+                    document.getElementById(
+                        "novaSenha"
+                    );
+
+
+                const confirmarNovaSenha =
+                    document.getElementById(
+                        "confirmarNovaSenha"
+                    );
+
+
+                const btnAlterarSenha =
+                    document.getElementById(
+                        "btnAlterarSenha"
+                    );
+
+
+                const btnLimparDados =
+                    document.getElementById(
+                        "btnLimparDados"
+                    );
+
+
+                /*
+                ========================================
+                CARREGAR DADOS DA CONTA
+                ========================================
+                */
+
+                if (usuario) {
+
+                    nomeUsuario.textContent =
+                        usuario.nome;
+
+
+                    configNome.value =
+                        usuario.nome;
+
+
+                    configUsuario.value =
+                        usuario.usuario;
+
+                }
+
+
+                /*
+                ========================================
+                SALVAR NOME / USUÁRIO
+                ========================================
+                */
+
+                btnSalvarConta.addEventListener(
+                    "click",
+                    function () {
+
+                        const resultado =
+                            Auth.atualizarConta(
+                                configNome.value,
+                                configUsuario.value
+                            );
+
+
+                        alert(
+                            resultado.mensagem
+                        );
+
+
+                        if (
+                            resultado.sucesso
+                        ) {
+
+                            const usuarioAtualizado =
+                                Auth.usuarioAtual();
+
+
+                            if (
+                                usuarioAtualizado
+                            ) {
+
+                                nomeUsuario.textContent =
+                                    usuarioAtualizado.nome;
+
+
+                                configNome.value =
+                                    usuarioAtualizado.nome;
+
+
+                                configUsuario.value =
+                                    usuarioAtualizado.usuario;
+
+                            }
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                ========================================
+                ALTERAR SENHA
+                ========================================
+                */
+
+                btnAlterarSenha.addEventListener(
+                    "click",
+                    function () {
+
+                        const resultado =
+                            Auth.alterarSenha(
+                                senhaAtual.value,
+                                novaSenha.value,
+                                confirmarNovaSenha.value
+                            );
+
+
+                        alert(
+                            resultado.mensagem
+                        );
+
+
+                        if (
+                            resultado.sucesso
+                        ) {
+
+                            senhaAtual.value =
+                                "";
+
+
+                            novaSenha.value =
+                                "";
+
+
+                            confirmarNovaSenha.value =
+                                "";
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                ========================================
+                LIMPAR MOVIMENTAÇÕES
+                ========================================
+                */
+
+                btnLimparDados.addEventListener(
+                    "click",
+                    function () {
+
+                        const confirmar =
+                            window.confirm(
+                                "Deseja realmente apagar todas as suas receitas e despesas? Esta ação não pode ser desfeita."
+                            );
+
+
+                        if (!confirmar) {
+                            return;
+                        }
+
+
+                        const usuarioId =
+                            Auth.usuarioId();
+
+
+                        const sucesso =
+                            Storage.limparDadosDoUsuario(
+                                usuarioId
+                            );
+
+
+                        if (sucesso) {
+
+                            alert(
+                                "Suas movimentações foram apagadas com sucesso."
+                            );
+
+                        } else {
+
+                            alert(
+                                "Não foi possível limpar seus dados."
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                ========================================
+                LOGOUT
+                ========================================
+                */
+
+                document
+                    .getElementById(
+                        "btnSair"
+                    )
+                    .addEventListener(
+                        "click",
+                        function () {
+
+                            Auth.logout();
+
+                        }
+                    );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
