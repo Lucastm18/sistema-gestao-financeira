@@ -49,7 +49,7 @@ O projeto consiste no desenvolvimento de um sistema web para auxiliar no gerenci
 ## Estrutura do Projeto
 
 ```text
-Trabalho-Gestao-Financeira/
+sistema-gestao-financeira/
 ├── assets/
 ├── data/
 ├── Documentação/
