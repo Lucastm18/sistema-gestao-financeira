@@ -1,55 +1,30 @@
-# Gestão Financeira
+# 💰 Gestão Financeira
 
-## Projeto Acadêmico
+Sistema web desenvolvido para auxiliar no controle e organização de finanças pessoais.
 
-Sistema de Gestão Financeira desenvolvido como trabalho acadêmico para a disciplina de Prática Profissional de Desenvolvimento.
+O projeto permite cadastrar e acompanhar receitas e despesas, visualizar relatórios financeiros e gerenciar usuários do sistema.
 
-## Instituição
+## ✨ Funcionalidades
 
-**UniBrasil – Centro Universitário Autônomo do Brasil**  
-Curitiba – PR
+- 👤 Cadastro de usuários
+- 🔐 Login
+- 🔑 Recuperação de senha
+- 💵 Cadastro e acompanhamento de receitas
+- 💸 Cadastro e acompanhamento de despesas
+- 📊 Relatórios financeiros
+- ⚙️ Configurações do sistema
+- 🌙 Tema claro e escuro
 
-## Curso
+## 🛠️ Tecnologias utilizadas
 
-Engenharia de Software
+<div>
+  <img src="https://skillicons.dev/icons?i=html,css,js" />
+</div>
 
-## Disciplina
-
-Prática Profissional de Desenvolvimento
-
-## Professor
-
-Leonel da Rocha
-
-## Integrantes
-
-- Leonardo de Oliveira
-- Lucas Teles
-
-## Sobre o Projeto
-
-O projeto consiste no desenvolvimento de um sistema web para auxiliar no gerenciamento das finanças pessoais, permitindo o controle e a organização de informações financeiras.
-
-## Funcionalidades
-
-- Cadastro de usuários
-- Login
-- Recuperação de senha
-- Cadastro e acompanhamento de receitas
-- Cadastro e acompanhamento de despesas
-- Relatórios financeiros
-- Configurações do sistema
-
-## Tecnologias Utilizadas
-
-- HTML5
-- CSS3
-- JavaScript
-
-## Estrutura do Projeto
+## 📁 Estrutura do projeto
 
 ```text
-sistema-gestao-financeira/
+gestao-financeira/
 ├── assets/
 ├── data/
 ├── Documentação/
